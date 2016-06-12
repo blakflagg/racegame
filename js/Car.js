@@ -1,5 +1,4 @@
-var carPic = document.createElement("img");
-var carPicLoaded = false;
+
 
 var carX = 75;
 var carY = 75;
@@ -48,15 +47,7 @@ function carReset() {
 }
 
 function drawCar(){
-  if(carPicLoaded){
 
     drawBitmapWithRotation(carPic,carX,carY,carAng);
-  }
-}
 
-function carImageLoad(){
-  carPic.onload = function(){
-    carPicLoaded = true;
-  }
-  carPic.src = "./Images/player1.png"
 }
