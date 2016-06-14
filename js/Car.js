@@ -71,6 +71,7 @@ class Car{
             this.Ang = -Math.PI/2;
             this.X = eachCol * TRACK_W + TRACK_W/2;
             this.Y = eachRow * TRACK_H + TRACK_H/2;
+            this.Speed = 0;
             return;
           }
         }

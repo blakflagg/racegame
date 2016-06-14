@@ -16,10 +16,15 @@ function imageLoadingDoneStartGame(){
     var framesPerSecond = 60;
     setInterval(updateAll, 1000 / framesPerSecond)
     setupInput();
-    blueCar.Reset(carPic);
-    greenCar.Reset(otherCarPic);
+    loadLevel(levelOne)
 }
 
+function loadLevel(whichLevel){
+  trackGrid = whichLevel.slice(); //this little trick will copy the array instead of refer to it
+
+  blueCar.Reset(carPic);
+  greenCar.Reset(otherCarPic);
+}
 function updateAll() {
     drawEverything();
     moveEverything();
