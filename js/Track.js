@@ -19,8 +19,8 @@ var trackGrid = [
   , 1, 0, 0, 1, 0, 0, 0, 1, 3, 1, 0, 0, 1, 3, 3, 1, 0, 0, 0, 1
   , 1, 0, 2, 1, 0, 0, 0, 1, 3, 1, 0, 0, 1, 1, 1, 1, 0, 0, 0, 1
   , 1, 1, 1, 1, 0, 0, 0, 1, 3, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1
-  , 1, 4, 0, 0, 0, 0, 1, 1, 3, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1
-  , 1, 4, 0, 0, 0, 0, 1, 1, 3, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1
+  , 0, 4, 0, 0, 0, 0, 1, 1, 3, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1
+  , 0, 4, 0, 0, 0, 0, 1, 1, 3, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1
   , 5, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 5
 ];
 
@@ -34,24 +34,23 @@ const TRACK_WALL_FLAG = 5;
 
 
 drawTracks = () => {
+    var arrayIndex = 0;
+    var drawTileX = 0;
+    var drawTileY = 0;
+
     for (var eachRow = 0; eachRow < TRACK_ROW; eachRow++) {
         for (var eachCol = 0; eachCol < TRACK_COLS; eachCol++) {
 
-            var arrayIndex = rowColToArrayIndex(eachCol, eachRow);
+            //var arrayIndex = rowColToArrayIndex(eachCol, eachRow);
+            var tileKind = trackGrid[arrayIndex];
+            var useImg = trackPics[tileKind];
 
-            if (trackGrid[arrayIndex] == TRACK_WALL) {
-                canvasContext.drawImage(wallPic,TRACK_W * eachCol, TRACK_H * eachRow)
-
-            }else if(trackGrid[arrayIndex] == TRACK_ROAD){
-              canvasContext.drawImage(roadPic,TRACK_W * eachCol, TRACK_H * eachRow)
-            }else if(trackGrid[arrayIndex] == TRACK_GOAL){
-              canvasContext.drawImage(goalPic,TRACK_W * eachCol, TRACK_H * eachRow)
-            }else if(trackGrid[arrayIndex] == TRACK_TREE){
-              canvasContext.drawImage(treePic,TRACK_W * eachCol, TRACK_H * eachRow)
-            }else if(trackGrid[arrayIndex] == TRACK_WALL_FLAG){
-              canvasContext.drawImage(flagPic,TRACK_W * eachCol, TRACK_H * eachRow)
-            }
+            canvasContext.drawImage(useImg,drawTileX, drawTileY);
+            drawTileX += TRACK_W;
+            arrayIndex++;
         }
+        drawTileY += TRACK_H;
+        drawTileX = 0;
     }
 }
 
