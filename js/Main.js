@@ -1,6 +1,8 @@
 var canvas;
 var canvasContext;
 
+var blueCar = new Car('player1',75,75,0,0);
+
 window.onload = function() {
     canvas = document.getElementById('gameCanvas');
     canvasContext = canvas.getContext('2d')
@@ -14,7 +16,7 @@ function imageLoadingDoneStartGame(){
     var framesPerSecond = 60;
     setInterval(updateAll, 1000 / framesPerSecond)
     setupInput();
-    carReset();
+    blueCar.Reset();
 }
 
 function updateAll() {
@@ -30,13 +32,13 @@ function clearScreen(){
 function drawEverything() {
     //clearScreen();
     drawTracks();
-    drawCar();
+    blueCar.draw();
 
 }
 
 moveEverything = () => {
 
-    carMove();
-    carTrackHandling();
+    blueCar.Move();
+    carTrackHandling(blueCar);
 
 };
