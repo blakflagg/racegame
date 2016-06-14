@@ -12,8 +12,24 @@ class Car{
     this.Y = y;
     this.Speed = speed;
     this.Ang = ang
-  }
 
+    this.keyHeld_Gas = false;
+    this.keyHeld_Reverse = false;
+    this.keyHeld_TurnLeft = false;
+    this.keyHeld_TurnRight = false;
+
+    this.controlKeyUp;
+    this.controlKeyDown;
+    this.controlKeyRight;
+    this.controlKeyLeft;
+
+  }
+  setupInput (upKey, rightKey, downKey, leftKey){
+    this.controlKeyUp =  upKey;
+    this.controlKeyDown = downKey;
+    this.controlKeyRight = rightKey;
+    this.controlKeyLeft = leftKey;
+  }
   set X(val){
     this._X = val;
   }
@@ -42,17 +58,20 @@ class Car{
     return this._Ang;
   }
 
-  Reset() {
+  Reset(whichImage) {
+    this.myCarPic = whichImage;
+
     for (var eachRow = 0; eachRow < TRACK_ROW; eachRow++) {
       for (var eachCol = 0; eachCol < TRACK_COLS; eachCol++) {
 
           var arrayIndex = rowColToArrayIndex(eachCol, eachRow);
 
           if (trackGrid[arrayIndex] == TRACK_PLAYERSTART) {
-            trackGrid[arrayIndex] = 0;
+            trackGrid[arrayIndex] = TRACK_ROAD;
             this.Ang = -Math.PI/2;
             this.X = eachCol * TRACK_W + TRACK_W/2;
             this.Y = eachRow * TRACK_H + TRACK_H/2;
+            return;
           }
         }
       }
@@ -60,19 +79,19 @@ class Car{
 
   Move() {
      this.Speed *= GROUNDSPEED_DECAY_MULT;
-    if(keyHeld_Gas){
+    if(this.keyHeld_Gas){
       this.Speed += DRIVER_POWER;
 
     }
-    if(keyHeld_Reverse){
+    if(this.keyHeld_Reverse){
       this.Speed -= REVERSE_POWER;
     }
-    if(keyHeld_TurnLeft){
+    if(this.keyHeld_TurnLeft){
       if(Math.abs(this.Speed) > MIN_SPEED_TO_TURN){
         this.Ang -= TURN_RATE;
       }
     }
-    if(keyHeld_TurnRight){
+    if(this.keyHeld_TurnRight){
       if(Math.abs(this.Speed) > MIN_SPEED_TO_TURN){
         this.Ang += TURN_RATE;
       }
@@ -80,11 +99,13 @@ class Car{
 
     this.X += Math.cos(this.Ang) * this.Speed;
     this.Y += Math.sin(this.Ang) * this.Speed;
+
+    carTrackHandling(this);
   }// end of move function
 
   draw(){
 
-      drawBitmapWithRotation(carPic,this.X,this.Y,this.Ang);
+      drawBitmapWithRotation(this.myCarPic,this.X,this.Y,this.Ang);
 
   }//end of draw
 
