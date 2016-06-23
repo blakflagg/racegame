@@ -14,7 +14,7 @@ window.onload = function() {
 
 function imageLoadingDoneStartGame(){
     var framesPerSecond = 60;
-    setInterval(updateAll, 1000 / framesPerSecond)
+    setInterval(updateAll, 1000 / framesPerSecond);
     setupInput();
     loadLevel(levelOne)
 }
@@ -28,7 +28,6 @@ function loadLevel(whichLevel){
 function updateAll() {
     drawEverything();
     moveEverything();
-
 }
 
 function clearScreen(){
@@ -44,9 +43,7 @@ function drawEverything() {
 }
 
 moveEverything = () => {
-
     blueCar.Move();
     greenCar.Move();
-
 
 };

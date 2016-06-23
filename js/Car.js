@@ -11,18 +11,12 @@ class Car{
     this.X = x;
     this.Y = y;
     this.Speed = speed;
-    this.Ang = ang
+    this.Ang = ang;
 
     this.keyHeld_Gas = false;
     this.keyHeld_Reverse = false;
     this.keyHeld_TurnLeft = false;
     this.keyHeld_TurnRight = false;
-
-    this.controlKeyUp;
-    this.controlKeyDown;
-    this.controlKeyRight;
-    this.controlKeyLeft;
-
   }
   setupInput (upKey, rightKey, downKey, leftKey){
     this.controlKeyUp =  upKey;
@@ -52,7 +46,6 @@ class Car{
 
   set Ang(val){
     this._Ang = val;
-
   }
   get Ang(){
     return this._Ang;
